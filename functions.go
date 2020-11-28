@@ -3,6 +3,7 @@ package aoc
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 func ParseInt(s string) int {
@@ -11,6 +12,14 @@ func ParseInt(s string) int {
 		panic(err)
 	}
 	return i
+}
+
+func ParseInts(str string, delim string) []int {
+	result := make([]int, 0)
+	for _, s := range strings.Split(str, delim) {
+		result = append(result, ParseInt(s))
+	}
+	return result
 }
 
 func BinarySearch(min int, max int, worker func(i int) bool, debug bool) int {
