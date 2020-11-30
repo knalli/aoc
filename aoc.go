@@ -18,6 +18,9 @@ func PrintStepHeader(step int) {
 	c := color.New(color.Bold, color.FgGreen)
 	c.Println()
 	switch step {
+	case 0:
+		c.Println("--- Part Demo ---")
+		break
 	case 1:
 		c.Println("--- Part One ---")
 		break
