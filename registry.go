@@ -26,4 +26,5 @@ func (r *RegistryType) Invoke(day int, args []string) error {
 	}
 }
 
+//goland:noinspection GoUnusedGlobalVariable
 var Registry = newRegistry()
