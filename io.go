@@ -2,6 +2,7 @@ package aoc
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -15,8 +16,7 @@ Read a file and returning the lines as array (without newlines)
 func ReadFileToArray(path string) ([]string, error) {
 	f, err := os.Open(path)
 	if err != nil {
-		fmt.Printf("error opening file: %v\n", err)
-		os.Exit(1)
+		return nil, errors.New(fmt.Sprintf("error opening file: %v", err))
 	}
 	//noinspection GoUnhandledErrorResult
 	defer f.Close()
@@ -46,19 +46,22 @@ func ReadFileToArray(path string) ([]string, error) {
 /**
 Read a file and returns its content as one string
 */
-func ReadFileToString(path string) (*string, error) {
+func ReadFileToString(path string) (string, error) {
 	if lines, err := ReadFileToArray(path); err != nil {
-		return nil, err
+		return "", err
 	} else {
 		result := strings.Join(lines, "\n")
-		return &result, nil
+		return result, nil
 	}
 }
 
-func ReadFileAsIntArray(file string) []int {
-	str, _ := ReadFileToString(file)
-	arr := strings.Split(strings.TrimSpace(*str), ",")
-	return ParseStringToIntArray(arr)
+func ReadFileAsIntArray(file string) ([]int, error) {
+	if str, err := ReadFileToString(file); err != nil {
+		return nil, err
+	} else {
+		arr := strings.Split(strings.TrimSpace(str), ",")
+		return ParseStringToIntArray(arr), nil
+	}
 }
 
 func ParseStringToIntArray(lines []string) []int {
