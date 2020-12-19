@@ -2,6 +2,7 @@ package aoc
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -99,6 +100,14 @@ func MinInt(a, b int) int {
 	} else {
 		return b
 	}
+}
+
+func MinIntArrayValue(arr []int) int {
+	min := math.MaxInt64
+	for _, n := range arr {
+		min = MinInt(min, n)
+	}
+	return min
 }
 
 func MaxInt(a, b int) int {
