@@ -42,3 +42,17 @@ func (q *Queue) LookHead() interface{} {
 	}
 	return nil
 }
+
+func (q *Queue) Clone() *Queue {
+	t := NewQueue()
+	for !q.IsEmpty() {
+		t.Add(q.Head())
+	}
+	c := NewQueue()
+	for !t.IsEmpty() {
+		v := t.Head()
+		q.Add(v)
+		c.Add(v)
+	}
+	return c
+}

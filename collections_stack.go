@@ -42,3 +42,17 @@ func (s *Stack) LookHead() interface{} {
 	}
 	return nil
 }
+
+func (s *Stack) Clone() *Stack {
+	t := NewStack()
+	for !s.IsEmpty() {
+		t.Add(s.Head())
+	}
+	c := NewStack()
+	for !t.IsEmpty() {
+		v := t.Head()
+		s.Add(v)
+		c.Add(v)
+	}
+	return c
+}
